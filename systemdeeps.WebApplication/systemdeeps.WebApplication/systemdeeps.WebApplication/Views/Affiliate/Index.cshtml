@@ -1,0 +1,36 @@
+@model IEnumerable<systemdeeps.WebApplication.Models.Affiliate>
+
+<h2>Lista de Afiliados</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Nuevo Afiliado</a>
+</p>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+    <tr>
+        <th>Nombre</th>
+        <th>Documento</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Fecha</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var a in Model)
+    {
+        <tr>
+            <td>@a.FullName</td>
+            <td>@a.DocumentNumber</td>
+            <td>@a.Email</td>
+            <td>@a.Phone</td>
+            <td>@a.DateRegistered.ToString("dd/MM/yyyy")</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@a.Id" class="btn btn-primary btn-sm">Editar</a>
+                <a asp-action="Delete" asp-route-id="@a.Id" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

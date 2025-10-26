@@ -1,0 +1,50 @@
+@model IEnumerable<systemdeeps.WebApplication.Models.Turn>
+
+<h2>Gestión de Turnos</h2>
+
+<form method="post" asp-action="Create" class="mb-3">
+    @Html.AntiForgeryToken()
+    <div class="input-group">
+        <input type="number" name="affiliateId" class="form-control" placeholder="ID del Afiliado" required />
+        <input type="text" name="description" class="form-control" placeholder="Descripción del turno (opcional)" />
+        <button class="btn btn-success">Nuevo Turno</button>
+    </div>
+</form>
+
+<form method="post" asp-action="Next" class="mb-3">
+    @Html.AntiForgeryToken()
+    <button class="btn btn-primary">Siguiente Turno</button>
+</form>
+
+<form method="post" asp-action="Reset" class="mb-3">
+    @Html.AntiForgeryToken()
+    <button class="btn btn-danger">Reiniciar Turnos</button>
+</form>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+    <tr>
+        <th>Número</th>
+        <th>Afiliado ID</th>
+        <th>Estado</th>
+        <th>Descripción</th>
+        <th>Fecha</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var t in Model)
+    {
+        <tr>
+            <td>@t.Number</td>
+            <td>@t.AffiliateId</td>
+            <td>@t.Status</td>
+            <td>@t.Description</td>
+            <td>@t.DateTime.ToString("g")</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<div class="mt-4">
+    <a asp-action="Tv" class="btn btn-dark">Ver Pantalla de TV</a>
+</div>

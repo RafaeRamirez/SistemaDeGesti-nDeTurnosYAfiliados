@@ -1,0 +1,7 @@
+﻿@model systemdeeps.WebApplication.Models.ErrorViewModel
+<h1 class="text-danger">Error</h1>
+@if (Model?.ShowRequestId ?? false)
+{
+    <p><strong>Id de solicitud:</strong> <code>@Model.RequestId</code></p>
+}
+<p>Ocurrió un error procesando la solicitud.</p>

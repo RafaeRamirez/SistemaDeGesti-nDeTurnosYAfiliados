@@ -1,0 +1,36 @@
+@{
+ViewData["Title"] = "Pantalla de TV";
+}
+
+<h2>Pantalla de Turnos</h2>
+<div class="display-4" id="currentTurn">Esperando...</div>
+<div class="lead" id="currentStatus"></div>
+
+@section Scripts{
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/turnHub")
+        .build();
+
+    function setTurn(n, status) {
+        document.getElementById("currentTurn").innerText = "Turno: " + n;
+        document.getElementById("currentStatus").innerText = "Estado: " + status;
+    }
+
+    connection.on("newTurnCreated", (number, status) => {
+        console.log("Nuevo turno creado:", number, status);
+    });
+
+    connection.on("currentTurnChanged", (number, status) => {
+        setTurn(number, status);
+    });
+
+    connection.on("queueUpdated", () => {
+        document.getElementById("currentTurn").innerText = "Reiniciado";
+        document.getElementById("currentStatus").innerText = "";
+    });
+
+    connection.start().catch(err => console.error(err));
+</script>
+}

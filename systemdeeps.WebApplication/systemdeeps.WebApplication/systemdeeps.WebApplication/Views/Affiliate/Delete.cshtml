@@ -1,0 +1,17 @@
+@model systemdeeps.WebApplication.Models.Affiliate
+@{
+    ViewData["Title"] = "Eliminar Afiliado";
+}
+
+<h2>Eliminar Afiliado</h2>
+
+<div class="alert alert-warning">
+    ¿Seguro que desea eliminar a <strong>@Model.FullName</strong>?
+</div>
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <button class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
